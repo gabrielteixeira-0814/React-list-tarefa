@@ -2,12 +2,14 @@
 import React, {useMemo} from 'react';
 import { format } from 'date-fns';
 import * as S from './styles';
+import dateFormat from 'dateformat';
 
 import iconDefault from '../../assets/default.png';
 
 function TaskCard({type, title, when}) {
-  const date = useMemo(() => format(new Date(when), 'dd/MM/yyy'));
-  const hour = useMemo(() => format(new Date(when), 'HH:mm') );
+ 
+  const datt = dateFormat(when, "dd/mm/yyyy");
+  console.log(datt);
 
   return (
     <S.Container>
@@ -16,7 +18,7 @@ function TaskCard({type, title, when}) {
             <h3>{title}</h3>
         </S.TopCard>
         <S.BottomCard>
-            <strong>date</strong>
+            <strong>{datt}</strong>
             <span>10:00</span>
         </S.BottomCard>
     </S.Container>
