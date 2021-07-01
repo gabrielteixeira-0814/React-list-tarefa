@@ -9,14 +9,14 @@ import typeIcons from  '../../utils/typeIcons';
 
 import iconDefault from '../../assets/default.png';
 
-function TaskCard({type, title, when}) {
+function TaskCard({type, title, when, done}) {
  
   const date = dateFormat(when, "dd/mm/yyyy");
   const hour = dateFormat(when, "HH:mm");
   console.log(date);
 
   return (
-    <S.Container>
+    <S.Container done={done}>
         <S.TopCard> 
             <img src={typeIcons[type]} alt="Icone da Tarefa" />
             <h3>{title}</h3>

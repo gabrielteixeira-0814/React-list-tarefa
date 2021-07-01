@@ -1,5 +1,6 @@
 import React from 'react';
 import * as S from './styles';
+import { Link } from 'react-router-dom';
 
 import logo from '../../assets/logo.png';
 import bell from '../../assets/bell.png';
@@ -11,22 +12,27 @@ function Header({ lateCount, clickNotification }) {
           <img src={logo} alt="Logo" />
       </S.LeftSide>
       <S.RightSide>
-        <a href="#">
+        <Link to="/">
           Início
-        </a>
+        </Link>
         <span className="dividir" />
-        <a href="#">
+        <Link to="/task">
           Nova Tarefa
-        </a>
+        </Link>
         <span className="dividir" />
-        <a href="#">
+        <Link to="/qrcode">
           Sincronizar Celular
-        </a>
-        <span className="dividir"/>
-        <button onClick={clickNotification} id="notification">
-          <img src={bell}alt="Notificação" />
-          <span>{lateCount}</span>
-        </button>
+        </Link>
+        {
+          lateCount &&
+          <>
+            <span className="dividir"/>
+            <button onClick={clickNotification} id="notification">
+              <img src={bell}alt="Notificação" />
+              <span>{lateCount}</span>
+            </button>
+          </>
+        }
 
       </S.RightSide>
     </S.Container>
