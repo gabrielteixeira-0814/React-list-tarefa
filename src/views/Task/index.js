@@ -4,6 +4,7 @@ import * as S from './styles';
 import { format } from 'date-fns';
  
 import api from '../../services/api';
+import isConnected from '../../utils/isConnected';
 
 // nossos componentes
 import Header from '../../components/Header';
@@ -15,7 +16,6 @@ import iconClock from '../../assets/clock.png';
 
 function Task({match}) {
   const [redirect, setRedirect] = useState(false);
-  const [lateCount, setLateCount] = useState();
   const [type, setType] = useState();
   const [id, setId] = useState();
   const [done, setDone] = useState(false);
@@ -23,16 +23,6 @@ function Task({match}) {
   const [description, setDescription] = useState();
   const [date, setDate] = useState();
   const [hour, setHour] = useState();
-  const [macaddress, setMacaddress] = useState('11:11:11:11:11:11');
-
-  async function lateVerify() {
-    await api.get(`/task/filter/late/11:11:11:11:11:11`)
-    .then(response => {
-      setLateCount(response.data.length);
-      console.log(response.data.length);
-    })
-  }
-
 
   async function LoadTaskDeyails() {
     await api.get(`/task/${match.params.id}`)
@@ -62,7 +52,7 @@ function Task({match}) {
 
     if (match.params.id) {
       await api.put(`/task/${match.params.id}`, {
-        macaddress,
+        macaddress: isConnected,
         done,
         type,
         title,
@@ -73,7 +63,7 @@ function Task({match}) {
       )
     }else {
       await api.post('/task', {
-        macaddress,
+        macaddress: isConnected,
         type,
         title,
         description,
@@ -94,14 +84,15 @@ function Task({match}) {
   }
 
   useEffect(() => {
-    lateVerify();
+    if(!isConnected)
+      setRedirect(true);
     LoadTaskDeyails();
   }, []);
 
   return (
     <S.Container>
       { redirect && <Redirect to="/" /> }
-      <Header lateCount={lateCount}/>
+      <Header />
       <S.Form>
         <S.TypeIcons>
           {

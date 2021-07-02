@@ -1,11 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import * as S from './styles';
 import { Link } from 'react-router-dom';
 
 import logo from '../../assets/logo.png';
 import bell from '../../assets/bell.png';
 
-function Header({ lateCount, clickNotification }) {
+import api from '../../services/api';
+import isConnected from '../../utils/isConnected';
+
+function Header({ clickNotification }) {
+  
+  const [lateCount, setLateCount] = useState();
+
+  async function lateVerify() {
+    await api.get(`/task/filter/late/${isConnected}`)
+    .then(response => {
+      setLateCount(response.data.length);
+      // console.log(response.data.length);
+    })
+  }
+
+  async function Logout() {
+    localStorage.removeItem('@todo/macaddress');
+    window.location.reload();
+  }
+
+  useEffect(() => {
+    lateVerify();
+  }, []);
+
   return (
     <S.Container>
       <S.LeftSide>
@@ -20,9 +43,13 @@ function Header({ lateCount, clickNotification }) {
           Nova Tarefa
         </Link>
         <span className="dividir" />
-        <Link to="/qrcode">
-          Sincronizar Celular
-        </Link>
+        { !isConnected ?
+          <Link to="/qrcode">
+            Sincronizar Celular
+          </Link>
+        :
+        <button type="button" onClick={Logout}>SAIR</button>
+      }
         {
           lateCount &&
           <>

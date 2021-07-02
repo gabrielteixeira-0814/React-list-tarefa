@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import * as S from './styles';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import api from '../../services/api';
+import isConnected from '../../utils/isConnected';
 
 // nossos componentes
 import Header from '../../components/Header';
@@ -13,22 +14,14 @@ import TaskCard from '../../components/TaskCard';
 function Home() {
   const [filterActived, setFilterActived] = useState('all');
   const [tasks, setTasks] = useState([]);
-  const [lateCount, setLateCount] = useState();
+  const [redirect, setRedirect] = useState(false);
 
   async function loadTasks() {
-    await api.get(`/task/filter/${filterActived}/11:11:11:11:11:11`)
+    await api.get(`/task/filter/${filterActived}/${isConnected}`)
     .then(response => {
       setTasks(response.data);
       // console.log(response.data);
 
-    })
-  }
-
-  async function lateVerify() {
-    await api.get(`/task/filter/late/11:11:11:11:11:11`)
-    .then(response => {
-      setLateCount(response.data.length);
-      // console.log(response.data.length);
     })
   }
 
@@ -37,12 +30,15 @@ function Home() {
   }
   useEffect(() => {
     loadTasks();
-    lateVerify();
+
+    if(!isConnected)
+      setRedirect(true);
   }, [filterActived]);
 
   return (
     <S.Container>
-      <Header lateCount={lateCount} clickNotification={Notificationn}/>
+      { redirect && <Redirect to="/qrcode" />}
+      <Header clickNotification={Notificationn}/>
       <S.FilterArea>
         <button type="button" onClick={() => setFilterActived("all")}>
           <FilterCard title="Todos" actived={filterActived === 'all'}/>
