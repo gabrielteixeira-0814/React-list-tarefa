@@ -1,6 +1,6 @@
 <h1 align="center">
     <img height="80" src="https://img.icons8.com/material-rounded/96/000000/api-settings.png" />
-    <p>API Node-lista-tarefa</p>
+    <p>React-list-tarefa</p>
 </h1>
 
 ## 🚨 About
