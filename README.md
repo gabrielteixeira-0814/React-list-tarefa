@@ -3,9 +3,13 @@
     <p>React-list-tarefa</p>
 </h1>
 
+<h1>
+  <img src="src/assets/lista-de-tarefa.gif" />
+</h1>
+
 ## 🚨 About
 
-**React-list-tarefa** It is a user task list API, where using the cell phone's macaddress you register the day-to-day tasks and only you have access to your tasks. 
+**React-list-tarefa** It is a web system to register your daily tasks, where using your cell phone's macaddress, only the user will have access to your tasks. 
 
 
 ## 🔨 Tools
