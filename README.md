@@ -14,14 +14,13 @@
 
 ## 🔨 Tools
 
-- [ReactJs](https://pt-br.reactjs.org/)
 - [JavaScript]()
 
 ## Libraries/Frameworks
 
 - [ReactJs](https://pt-br.reactjs.org/)
 
-### Requisitos
+### Requirements
 
 - Have installed at least one React package manager, [Npm](https://nodejs.org/en/) or [Yarn](https://yarnpkg.com/).
 - Run the Node-lista-tarefa project API before booting the system
