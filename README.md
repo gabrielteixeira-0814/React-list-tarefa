@@ -55,8 +55,8 @@
 
 ## 📝 License
 
-This project is under the MIT license. See the file <a href="https://github.com/Ezever/Projeto-NASA/blob/master/LICENSE">LICENCE</a> for more details.
+This project is under the MIT license. See the file <a href="https://github.com/gabrielteixeira-0814/React-list-tarefa/blob/main/LICENSE">LICENCE</a> for more details.
 
 ---
 
-<p align="center">Done with Gabriel Teixeira</p>
+<p align="center">Created by Gabriel Teixeira</p>
